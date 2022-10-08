@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import { MdDarkMode } from "react-icons/md";
+import { SiGithub } from "react-icons/si";
 
 const Navbar = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -19,10 +20,18 @@ const Navbar = ({ children }) => {
         <div className="dark:bg-slate-800 h-screen dark:text-white">
           <div className="w-screen flex p-3 justify-evenly items-center">
             <h1 className="text-4xl">Next-Firebase-Demo</h1>
-            <MdDarkMode
-              className="text-2xl cursor-pointer"
-              onClick={() => setIsDarkMode(!isDarkMode)}
-            />
+            <div className="flex gap-10 items-center">
+              <MdDarkMode
+                className="text-2xl cursor-pointer"
+                onClick={() => setIsDarkMode(!isDarkMode)}
+              />
+              <a
+                href="https://github.com/Keshav13142/NextJs-Firebase-Auth"
+                target={"_blank"}
+              >
+                <SiGithub className="text-2xl cursor-pointer" />
+              </a>
+            </div>
           </div>
           {children}
         </div>
