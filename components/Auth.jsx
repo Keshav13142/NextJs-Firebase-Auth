@@ -1,32 +1,16 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import Link from "next/link";
 import { useState } from "react";
 import { BsGoogle } from "react-icons/bs";
 import { SiGithub } from "react-icons/si";
-import { auth } from "../utils/firebase_auth";
 
-const Login = () => {
+const Login = ({ handleSubmit, title, type }) => {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
 
-  const handleNormalLogin = async () => {
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <div className="max-w-lg mx-auto mt-10 flex flex-col p-10 shadow-xl rounded-xl">
-      <h1 className="text-3xl text-blue-500 font-medium font-mono">
-        Login / SignUp here!!
-      </h1>
+    <div className="max-w-lg mx-auto mt-10 flex flex-col p-10 shadow-xl rounded-xl dark:bg-slate-700">
+      <h1 className="text-3xl text-blue-500 font-medium font-mono">{title}</h1>
       <p className="text-lg my-5">
         If you're interested in learning new things, feel free to use this
         app...
@@ -39,7 +23,7 @@ const Login = () => {
       >
         <input
           value={email}
-          className="border-gray-300 border-2 rounded-xl p-2 dark:border-none  text-black dark:bg-gray-100 placeholder:font-lg placeholder:font-medium"
+          className="border-gray-300 border-2 rounded-xl p-2  text-black dark:bg-gray-100 placeholder:font-lg placeholder:font-medium"
           type="text"
           name="email"
           id="email"
@@ -48,7 +32,7 @@ const Login = () => {
         />
         <input
           value={password}
-          className="border-gray-300 border-2 rounded-xl p-2 dark:border-none text-black dark:bg-gray-100 placeholder:font-lg placeholder:font-medium"
+          className="border-gray-300 border-2 rounded-xl p-2 text-black dark:bg-gray-100 placeholder:font-lg placeholder:font-medium"
           type="password"
           name="password"
           id="password"
@@ -58,10 +42,29 @@ const Login = () => {
         <button
           id="submit"
           className="bg-blue-400 rounded-xl p-2 font-medium text-white mt-4"
-          onClick={handleNormalLogin}
+          onClick={() => handleSubmit(email, password)}
         >
           Get started 🚀
         </button>
+        {type === "Login" ? (
+          <p className="self-center font-medium">
+            New user?{" "}
+            <Link href="/register">
+              <span className="text-blue-700 cursor-pointer dark:text-blue-500">
+                Sign Up
+              </span>
+            </Link>
+          </p>
+        ) : (
+          <p className="self-center font-medium">
+            Alderady have an account?{" "}
+            <Link href="/">
+              <span className="text-blue-700 cursor-pointer dark:text-blue-500">
+                Login
+              </span>
+            </Link>
+          </p>
+        )}
       </div>
       <span className="border-4 rounded-full self-center p-2 border-red-200 my-5">
         OR
