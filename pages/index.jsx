@@ -191,14 +191,15 @@ const Auth = () => {
         Click here to test your IQ{" "}
         {isMobile ? (
           <a
-            className="text-blue-500 underline font-medium cursor-pointer"
+            className="text-blue-500 underline font-medium"
             href="https://m.youtube.com/watch?v=dQw4w9WgXcQ"
+            target={"_blank"}
           >
             Go ahead
           </a>
         ) : (
           <a
-            className="text-blue-500 underline font-medium"
+            className="text-blue-500 underline font-medium cursor-pointer"
             onClick={() => {
               window.open("https://youtu.be/dQw4w9WgXcQ", "_blank");
             }}
