@@ -192,8 +192,7 @@ const Auth = () => {
         {isMobile ? (
           <a
             className="text-blue-500 underline font-medium cursor-pointer"
-            href="https://youtu.be/j5a0jTc9S10"
-            target="_blank"
+            href="https://m.youtube.com/watch?v=dQw4w9WgXcQ"
           >
             Go ahead
           </a>
