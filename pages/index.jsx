@@ -88,9 +88,6 @@ const Auth = () => {
 
     if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
       window.location = app;
-      window.setTimeout(function () {
-        window.location = mobileFallback;
-      }, 25);
     } else {
       window.location = desktopFallback;
     }
