@@ -5,7 +5,7 @@ import { SiGithub } from "react-icons/si";
 import Toast from "./Toast";
 
 const Navbar = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   return (
     <div>

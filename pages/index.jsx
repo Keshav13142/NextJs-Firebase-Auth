@@ -22,7 +22,9 @@ const Auth = () => {
 
   const [email, setEmail] = useState("");
 
-  // const [password, setPassword] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  const [isDumb, setIsDumb] = useState(false);
 
   const [isEmailSent, setIsEmailSent] = useState(false);
 
@@ -79,6 +81,18 @@ const Auth = () => {
     setIsEmailSent(true);
   };
 
+  const importantStuff = () => {
+    let details = navigator.userAgent;
+
+    let regexp = /android|iphone|kindle|ipad/i;
+
+    let isMobileDevice = regexp.test(details);
+
+    if (isMobileDevice) {
+      setIsMobile(true);
+    }
+  };
+
   const googleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -99,6 +113,7 @@ const Auth = () => {
 
   useEffect(() => {
     // checkUserSignIn();
+    importantStuff();
   }, []);
 
   return (
@@ -174,14 +189,24 @@ const Auth = () => {
       )}
       <p className="text-lg self-center mt-5">
         Click here to test your IQ{" "}
-        <a
-          className="text-blue-500 underline font-medium cursor-pointer"
-          onClick={() => {
-            window.open("https://youtu.be/dQw4w9WgXcQ", "_blank");
-          }}
-        >
-          Go ahead
-        </a>
+        {isMobile ? (
+          <a
+            className="text-blue-500 underline font-medium cursor-pointer"
+            href="https://youtu.be/j5a0jTc9S10"
+            target="_blank"
+          >
+            Go ahead
+          </a>
+        ) : (
+          <a
+            className="text-blue-500 underline font-medium"
+            onClick={() => {
+              window.open("https://youtu.be/dQw4w9WgXcQ", "_blank");
+            }}
+          >
+            Go ahead
+          </a>
+        )}
       </p>
     </div>
   );
