@@ -82,15 +82,24 @@ const Auth = () => {
   };
 
   const importantStuff = () => {
-    let details = navigator.userAgent;
+    var desktopFallback = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      mobileFallback = "https://youtube.com/watch?v=dQw4w9WgXcQ",
+      app = "vnd.youtube://dQw4w9WgXcQ";
 
-    let regexp = /android|iphone|kindle|ipad/i;
-
-    let isMobileDevice = regexp.test(details);
-
-    if (isMobileDevice) {
-      setIsMobile(true);
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      window.location = app;
+      window.setTimeout(function () {
+        window.location = mobileFallback;
+      }, 25);
+    } else {
+      window.location = desktopFallback;
     }
+
+    function killPopup() {
+      window.removeEventListener("pagehide", killPopup);
+    }
+
+    window.addEventListener("pagehide", killPopup);
   };
 
   const googleSignIn = async () => {
@@ -113,7 +122,7 @@ const Auth = () => {
 
   useEffect(() => {
     // checkUserSignIn();
-    importantStuff();
+    // importantStuff();
   }, []);
 
   return (
@@ -189,24 +198,12 @@ const Auth = () => {
       )}
       <p className="text-lg self-center mt-5">
         Click here to test your IQ{" "}
-        {isMobile ? (
-          <a
-            className="text-blue-500 underline font-medium"
-            href="https://m.youtube.com/watch?v=dQw4w9WgXcQ"
-            target={"_blank"}
-          >
-            Go ahead
-          </a>
-        ) : (
-          <a
-            className="text-blue-500 underline font-medium cursor-pointer"
-            onClick={() => {
-              window.open("https://youtu.be/dQw4w9WgXcQ", "_blank");
-            }}
-          >
-            Go ahead
-          </a>
-        )}
+        <a
+          className="text-blue-500 underline font-medium cursor-pointer"
+          onClick={importantStuff}
+        >
+          Go ahead
+        </a>
       </p>
     </div>
   );
